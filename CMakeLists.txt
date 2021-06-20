@@ -6,6 +6,8 @@ project(safe-evpp C CXX)
 # ---- Build options ----------------------------------------------------------
 # -----------------------------------------------------------------------------
 
+set(CMAKE_BUILD_TYPE "Release")
+
 option(EVPP_BUILD_SHARED "Build shared library" OFF)
 option(EVPP_BUILD_BOOST "Build boost library." OFF)
 option(EVPP_BUILD_CONCURRENT "Build concurrent library." OFF)
@@ -14,6 +16,8 @@ option(EVPP_VCPKG_BUILD "Package build." ON)
 option(EVPP_BUILD_APPS "Build applications." OFF)
 option(EVPP_BUILD_LABS "Build laboratoires." OFF)
 option(EVPP_BUILD_PKG "Build tests." OFF)
+
+message(STATUS "EVPP build type: ${CMAKE_BUILD_TYPE}")
 
 if(UNIX)
     if(NOT CMAKE_BUILD_TYPE)
@@ -89,15 +93,6 @@ set(CMAKE_MACOSX_RPATH 0)
 find_program(THRIFT_COMPILER thrift)
 find_path(THRIFT_INCLUDE_DIR thrift)
 find_library(THRIFT_LIBRARY NAMES thrift)
-
-message(STATUS "This is BINARY dir " ${PROJECT_BINARY_DIR})
-message(STATUS "This is SOURCE dir " ${PROJECT_SOURCE_DIR})
-message(STATUS "CMAKE_CXX_FLAGS " ${CMAKE_CXX_FLAGS})
-message(STATUS "EXECUTABLE_OUTPUT_PATH " ${EXECUTABLE_OUTPUT_PATH})
-message(STATUS "LIBRARY_OUTPUT_PATH " ${LIBRARY_OUTPUT_PATH})
-message(STATUS "THRIFT_COMPILER " ${THRIFT_COMPILER})
-message(STATUS "THRIFT_INCLUDE_DIR " ${THRIFT_INCLUDE_DIR})
-message(STATUS "THRIFT_LIBRARY " ${THRIFT_LIBRARY})
 
 add_subdirectory(evpp)
 
